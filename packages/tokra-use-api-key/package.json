@@ -1,0 +1,26 @@
+{
+  "name": "tokra-use-api-key",
+  "version": "0.0.1-rc.1",
+  "description": "Tokra api key authentication hook",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "author": "rayepps",
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/rayepps/tokra"
+  },
+  "scripts": {
+    "test": "node --register ts-node/register --test **/tests/*.test.ts",
+    "build": "tsc",
+    "lint": "tslint -p tsconfig.json",
+    "clean": "rm -rf ./node_modules && rm -rf ./dist && rm -rf ./coverage"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "radash": "^7.1.0",
+    "tokra": "^0.0.1-rc.1"
+  }
+}

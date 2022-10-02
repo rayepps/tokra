@@ -4,8 +4,9 @@
   "compilerOptions": {
     "preserveWatchOutput": true,
     "strict": true,
-    "outDir": "dist",
-    "lib": ["es2016"],
+    "lib": [
+      "es2016"
+    ],
     "declaration": true,
     "sourceMap": true,
     "declarationMap": true,
@@ -13,12 +14,5 @@
     "forceConsistentCasingInFileNames": true,
     "inlineSources": false,
     "isolatedModules": true
-  },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  }
 }

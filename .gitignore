@@ -5,6 +5,9 @@ node_modules
 .pnp
 .pnp.js
 
+# Build
+dist
+
 # testing
 coverage
 

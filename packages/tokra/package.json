@@ -1,0 +1,23 @@
+{
+  "name": "tokra",
+  "version": "0.0.1-rc.1",
+  "description": "Tokra types and hook helper functions",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "author": "rayepps",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --register ts-node/register --test **/*.test.ts",
+    "check": "yarn lint && yarn test && yarn build",
+    "build": "tsc",
+    "lint": "tslint -p tsconfig.json",
+    "clean": "rm -rf ./node_modules && rm -rf ./dist && rm -rf ./coverage"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "radash": "^7.1.0"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "tokra-use-jwt-auth",
+  "version": "0.0.0",
+  "description": "Tokra authentication hook for JWTs",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "author": "rayepps",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --register ts-node/register --test **/*.test.ts",
+    "build": "tsc",
+    "lint": "tslint -p tsconfig.json",
+    "clean": "rm -rf ./node_modules && rm -rf ./dist && rm -rf ./coverage"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.6"
+  },
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1",
+    "tokra": "^0.0.1-rc.1"
+  }
+}

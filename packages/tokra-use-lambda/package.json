@@ -1,0 +1,25 @@
+{
+  "name": "tokra-use-lambda",
+  "version": "0.0.19",
+  "description": "Tokra root hook to handle function running on AWS Lambda",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "author": "rayepps",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --register ts-node/register --test **/*.test.ts",
+    "check": "yarn lint && yarn test && yarn build",
+    "build": "tsc",
+    "lint": "tslint -p tsconfig.json",
+    "clean": "rm -rf ./node_modules && rm -rf ./dist && rm -rf ./coverage"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.97"
+  },
+  "dependencies": {
+    "tokra": "^0.0.1-rc.1"
+  }
+}
