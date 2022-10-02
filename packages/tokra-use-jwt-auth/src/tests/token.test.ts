@@ -1,3 +1,6 @@
-import test from 'node:test'
+import { expect, test } from '@jest/globals'
+import { create } from '../token'
 
-test('hello', () => {})
+test('create token stop gap', () => {
+  expect(create).not.toBeNull()
+})

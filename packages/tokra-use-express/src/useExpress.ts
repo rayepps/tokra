@@ -1,4 +1,4 @@
-import * as makeCompressionMiddleware from 'compression'
+import makeCompressionMiddleware from 'compression'
 import type { NextFunction, Request, Response } from 'express'
 import { json as makeJsonMiddleware } from 'express'
 import { partial, sift, try as tryit } from 'radash'
@@ -34,7 +34,7 @@ const makeMiddleware = (options: ExpressFunctionOptions) => {
   ]) as InvertedMiddlewareFunc[]
 }
 
-async function createExpressHandler(
+export async function withExpress(
   func: ApiFunction,
   options: ExpressFunctionOptions,
   req: Request,
@@ -42,24 +42,19 @@ async function createExpressHandler(
 ) {
   const middleware = composeMiddleware(...makeMiddleware(options))
   const reqAfterMiddlware = await middleware(req, res)
-
   const props: Props = initProps(makeReq(reqAfterMiddlware))
 
   const [error, result] = await tryit<any>(func)(props)
-
-  if (error) {
-    console.error(error)
-  }
+  if (error) console.error(error)
 
   const response = error ? responseFromError(error) : responseFromResult(result)
-
   setResponse(res, response)
 }
 
 export const useExpress =
   (options: ExpressFunctionOptions = {}) =>
   (func: ApiFunction) =>
-    partial(createExpressHandler, func, options)
+    partial(withExpress, func, options)
 
 export function setResponse(res: Response, response: ExoResponse) {
   const { body, status = 200, headers = {} } = response as ExoResponse

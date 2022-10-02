@@ -10,7 +10,7 @@ import { initProps, responseFromError, responseFromResult } from 'tokra'
 
 export type NextFunctionOptions = {}
 
-async function createExpressHandler(
+export async function withNext(
   func: ApiFunction,
   options: NextFunctionOptions,
   req: NextApiRequest,
@@ -28,7 +28,7 @@ async function createExpressHandler(
 export const useNext =
   (options: NextFunctionOptions = {}) =>
   (func: ApiFunction) =>
-    partial(createExpressHandler, func, options)
+    partial(withNext, func, options)
 
 export function setResponse(res: NextApiResponse, response: TokraResponse) {
   const { body, status = 200, headers = {} } = response as TokraResponse

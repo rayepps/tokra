@@ -1,5 +1,4 @@
-import assert from 'node:assert/strict'
-import test from 'node:test'
+import { expect, test } from '@jest/globals'
 import { withServices } from '../useServices'
 
 test('withServices passess all services', async () => {
@@ -9,8 +8,8 @@ test('withServices passess all services', async () => {
   }
   const mockFunc = (props: any) => props.services
   const result = await withServices(mockFunc, services, { services: {} } as any)
-  assert.equal(result.octokit, 'o-service')
-  assert.equal(result.redis, 'r-service')
+  expect(result.octokit).toBe('o-service')
+  expect(result.redis).toBe('r-service')
 })
 
 test('withServices passess existing services', async () => {
@@ -25,7 +24,7 @@ test('withServices passess existing services', async () => {
   const result = await withServices(mockFunc, services, {
     services: existingServices
   } as any)
-  assert.equal(result.octokit, 'o-service')
-  assert.equal(result.redis, 'r-service')
-  assert.equal(result.database, 'd-service')
+  expect(result.octokit).toBe('o-service')
+  expect(result.redis).toBe('r-service')
+  expect(result.database).toBe('d-service')
 })

@@ -1,3 +1,6 @@
-import test from 'node:test'
+import { expect, test } from '@jest/globals'
+import { withLambda } from '../useLambda'
 
-test('this is find', () => {})
+test('useLambda stop gap', () => {
+  expect(withLambda).not.toBeNull()
+})

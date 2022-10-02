@@ -1,3 +1,6 @@
-import test from 'node:test'
+import { expect, test } from '@jest/globals'
+import { withExpress } from '../useExpress'
 
-test('this is find', () => {})
+test('useExpress stop gap', () => {
+  expect(withExpress).not.toBeNull()
+})

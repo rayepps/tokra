@@ -10,10 +10,8 @@
   "author": "rayepps",
   "license": "MIT",
   "scripts": {
-    "test": "node --register ts-node/register --test **/*.test.ts",
-    "check": "yarn lint && yarn test && yarn build",
     "build": "tsc",
-    "lint": "tslint -p tsconfig.json",
+    "test": "node --require ts-node/register --test **/*.test.ts",
     "clean": "rm -rf ./node_modules && rm -rf ./dist && rm -rf ./coverage"
   },
   "devDependencies": {},

@@ -1,8 +1,7 @@
-import assert from 'node:assert/strict'
-import test from 'node:test'
+import { expect, test } from '@jest/globals'
 
 import { ERROR_NAME } from '../error'
 
 test('do not fail because there are no tests', () => {
-  assert.strictEqual(ERROR_NAME, 'tokra.error')
+  expect(ERROR_NAME).toBe('tokra.error')
 })

@@ -7,7 +7,7 @@ export type LambdaOptions = {
   callbackWaitsForEmptyEventLoop?: boolean
 }
 
-async function lambdaHandler(
+export async function withLambda(
   func: ApiFunction,
   options: LambdaOptions,
   event: AWSLambda.APIGatewayEvent,
@@ -38,7 +38,7 @@ async function lambdaHandler(
 }
 
 export const useLambda = (options?: LambdaOptions) => (func: ApiFunction) => {
-  return _.partial(lambdaHandler, func, options ?? {})
+  return _.partial(withLambda, func, options ?? {})
 }
 
 const makeReq = (

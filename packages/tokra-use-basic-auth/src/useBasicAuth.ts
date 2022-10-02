@@ -13,7 +13,7 @@ export const unauthorized = partob(error, {
   cause: 'NOT_AUTHENTICATED'
 })
 
-export async function withBasicToken(func: ApiFunction, props: Props) {
+export async function withBasicAuth(func: ApiFunction, props: Props) {
   const header = props.req.headers['authorization'] as string
   if (!header) {
     throw unauthorized({
@@ -52,5 +52,5 @@ export async function withBasicToken(func: ApiFunction, props: Props) {
 }
 
 export const useBasicAuth = () => (func: ApiFunction) => {
-  return partial(withBasicToken, func)
+  return partial(withBasicAuth, func)
 }

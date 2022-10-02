@@ -1,3 +1,6 @@
-import test from 'node:test'
+import { expect, test } from '@jest/globals'
+import { withJWTAuth } from '../useJWTAuth'
 
-test('hello', () => {})
+test('useJWTAuth stop gap', () => {
+  expect(withJWTAuth).not.toBeNull()
+})

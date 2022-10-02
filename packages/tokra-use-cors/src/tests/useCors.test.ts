@@ -1,3 +1,6 @@
-import test from 'node:test'
+import { expect, test } from '@jest/globals'
+import { withCors } from '../useCors'
 
-test('useCors passess all services', () => {})
+test('useCors stop gap', () => {
+  expect(withCors).not.toBeNull()
+})

@@ -1,5 +1,4 @@
-import assert from 'node:assert'
-import test from 'node:test'
+import { expect, test } from '@jest/globals'
 import type { Props } from 'tokra'
 import * as yup from 'yup'
 import { validate, withShapeValidation } from '../useValidation'
@@ -15,7 +14,7 @@ test('validate throws when missing required attribute', async () => {
       id: 22
       // no name
     })
-    assert.fail('Expected error to be thrown')
+    throw new Error('Expected validate to throw an error')
   } catch (err) {}
 })
 
@@ -24,7 +23,7 @@ test('validate returns validated model', async () => {
     id: 22,
     name: 'ray'
   })
-  assert.equal(result.id, 22)
+  expect(result.id).toBe(22)
 })
 
 test('validate casts valid model', async () => {
@@ -32,14 +31,14 @@ test('validate casts valid model', async () => {
     id: '22',
     name: 'ray'
   })
-  assert.equal(result.id, 22)
+  expect(result.id).toBe(22)
 })
 
 test('withShapeValidation applies model attributes to args', async () => {
   const mockHandlerFn = (props: any) => props.args
-  const getArgs = (props: any) => props.meta.query
+  const getArgs = (props: any) => props.req.query
   const props = {
-    meta: {
+    req: {
       query: {
         id: 22,
         name: 'mock-nmame'
@@ -47,6 +46,6 @@ test('withShapeValidation applies model attributes to args', async () => {
     }
   } as any as Props
   const args = await withShapeValidation(mockHandlerFn, model, getArgs, props)
-  assert.equal(args.id, props.req.query.id)
-  assert.equal(args.name, props.req.query.name)
+  expect(args.id).toBe(props.req.query.id)
+  expect(args.name).toBe(props.req.query.name)
 })
