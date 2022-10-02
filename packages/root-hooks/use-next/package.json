@@ -1,0 +1,26 @@
+{
+  "name": "tokra-use-next",
+  "version": "0.0.1",
+  "description": "Exobase root hook to handle function running on Next.js api functions",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "author": "rayepps",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --register ts-node/register --test **/*.test.ts",
+    "dev": "npm run build --watch",
+    "check": "yarn lint && yarn test && yarn build",
+    "build": "tsup src/index.ts --format cjs --dts",
+    "lint": "tslint -p tsconfig.json",
+    "clean": "rm -rf ./node_modules && rm -rf ./dist && rm -rf ./coverage"
+  },
+  "devDependencies": {
+    "next": "^12.2.3"
+  },
+  "dependencies": {
+    "@exobase/core": "^0.0.8"
+  }
+}

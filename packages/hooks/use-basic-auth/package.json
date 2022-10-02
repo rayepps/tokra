@@ -1,0 +1,23 @@
+{
+  "name": "tokra-use-basic-auth",
+  "version": "0.0.19",
+  "description": "Tokra basic authentication hook",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "author": "rayepps",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --register ts-node/register --test **/tests/*.test.ts",
+    "check": "yarn lint && yarn test && yarn build",
+    "build": "tsc",
+    "lint": "tslint -p tsconfig.json",
+    "clean": "rm -rf ./node_modules && rm -rf ./dist && rm -rf ./coverage"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "@exobase/core": "^0.0.8"
+  }
+}

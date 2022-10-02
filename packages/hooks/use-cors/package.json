@@ -1,0 +1,23 @@
+{
+  "name": "tokra-use-cors",
+  "version": "0.0.13",
+  "description": "Tokra hook for CORS request/response",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "author": "rayepps",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --register ts-node/register --test **/*.test.ts",
+    "check": "yarn lint && yarn test && yarn build",
+    "build": "tsc",
+    "lint": "tslint -p tsconfig.json",
+    "clean": "rm -rf ./node_modules && rm -rf ./dist && rm -rf ./coverage"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "@exobase/core": "^0.0.8"
+  }
+}
