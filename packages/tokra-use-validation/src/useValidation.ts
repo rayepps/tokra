@@ -1,8 +1,8 @@
-import * as yup from 'yup'
 import { partial, partob } from 'radash'
-import type { Props, ApiFunction } from 'tokra'
+import type { ApiFunction, Props } from 'tokra'
 import { error } from 'tokra'
-import { Yup, KeyOfType } from './types'
+import * as yup from 'yup'
+import { KeyOfType, Yup } from './types'
 
 const validationFailed = partob(error, {
   message: 'Json body validation failed',

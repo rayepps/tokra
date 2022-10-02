@@ -1,5 +1,5 @@
 import _ from 'radash'
-import type { Props, ApiFunction } from 'tokra'
+import type { ApiFunction, Props } from 'tokra'
 import { initProps, responseFromError, responseFromResult } from 'tokra'
 import { LambdaRequest } from './types'
 

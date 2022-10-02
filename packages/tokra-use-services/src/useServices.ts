@@ -1,5 +1,5 @@
-import { parallel, objectify, partial } from 'radash'
-import type { Props, ApiFunction } from 'tokra'
+import { objectify, parallel, partial } from 'radash'
+import type { ApiFunction, Props } from 'tokra'
 
 type ServiceMap<TServices> = {
   -readonly [Key in keyof TServices]:

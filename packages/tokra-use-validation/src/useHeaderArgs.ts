@@ -1,7 +1,7 @@
 import { partial } from 'radash'
-import type { Props, ApiFunction } from 'tokra'
+import type { ApiFunction, Props } from 'tokra'
+import { KeyOfType, Yup } from './types'
 import { useValidation } from './useValidation'
-import { Yup, KeyOfType } from './types'
 
 export const useHeaderArgs = partial(
   useValidation,

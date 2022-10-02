@@ -1,5 +1,5 @@
-import { partial, try as tryit } from 'radash'
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { partial, try as tryit } from 'radash'
 import type {
   ApiFunction,
   Props,

@@ -3,6 +3,7 @@
 > Exobase root hook to handle function running on AWS Lambda. Built to support invocation from api gateway
 
 ## Install
+
 ```sh
 yarn add @exobase/lambda
 ```
@@ -20,9 +21,5 @@ export const pingEndpoint = async (props: Props) => {
   }
 }
 
-export default compose(
-  useLambda(),
-  pingEndpoint
-)
+export default compose(useLambda(), pingEndpoint)
 ```
-

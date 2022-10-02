@@ -1,8 +1,8 @@
 // IMPORT
 import { error } from './error'
 import {
-  initProps,
   defaultResponse,
+  initProps,
   responseFromError,
   responseFromResult
 } from './response'
@@ -10,12 +10,11 @@ import {
 // EXPORT
 export { error } from './error'
 export {
-  initProps,
   defaultResponse,
+  initProps,
   responseFromError,
   responseFromResult
 } from './response'
-
 export * from './types'
 
 export default {

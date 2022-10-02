@@ -3,6 +3,7 @@
 > Exobase root hook to handle function running on Next.js api functions
 
 ## Install
+
 ```sh
 yarn add tokra-use-next
 ```
@@ -20,9 +21,5 @@ export const pingEndpoint = async (props: Props) => {
   }
 }
 
-export default compose(
-  useNext(),
-  pingEndpoint
-)
+export default compose(useNext(), pingEndpoint)
 ```
-

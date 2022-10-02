@@ -1,6 +1,7 @@
-import { partial, try as tryit, sift } from 'radash'
+import * as makeCompressionMiddleware from 'compression'
+import type { NextFunction, Request, Response } from 'express'
 import { json as makeJsonMiddleware } from 'express'
-import type { Request, Response, NextFunction } from 'express'
+import { partial, sift, try as tryit } from 'radash'
 import type {
   ApiFunction,
   Props,
@@ -8,7 +9,6 @@ import type {
   Response as ExoResponse
 } from 'tokra'
 import { initProps, responseFromError, responseFromResult } from 'tokra'
-import * as makeCompressionMiddleware from 'compression'
 
 type ExpressMiddlewareFunc = (
   req: Request,

@@ -1,6 +1,6 @@
 {
   "name": "tokra-use-validation",
-  "version": "0.0.0",
+  "version": "0.0.0-rc.1",
   "description": "Tokra request validation hooks",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

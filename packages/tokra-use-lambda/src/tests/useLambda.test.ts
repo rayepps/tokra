@@ -1,5 +1,3 @@
 import test from 'node:test'
 
-test('this is find', () => {
-  
-})
+test('this is find', () => {})

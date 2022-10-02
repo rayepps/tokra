@@ -1,6 +1,6 @@
 {
   "name": "tokra-use-jwt-auth",
-  "version": "0.0.0",
+  "version": "0.0.0-rc.1",
   "description": "Tokra authentication hook for JWTs",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

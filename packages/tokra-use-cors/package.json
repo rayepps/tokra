@@ -1,6 +1,6 @@
 {
   "name": "tokra-use-cors",
-  "version": "0.0.13",
+  "version": "0.0.0-rc.1",
   "description": "Tokra hook for CORS request/response",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

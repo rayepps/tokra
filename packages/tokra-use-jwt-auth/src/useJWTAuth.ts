@@ -1,6 +1,6 @@
-import { partial, partob } from 'radash'
 import * as jwt from 'jsonwebtoken'
-import type { Props, ApiFunction } from 'tokra'
+import { partial, partob } from 'radash'
+import type { ApiFunction, Props } from 'tokra'
 import { error } from 'tokra'
 import { Token } from './token'
 

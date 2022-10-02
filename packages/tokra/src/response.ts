@@ -1,7 +1,7 @@
-import * as t from './types'
-import { error, ERROR_NAME } from './error'
 import { partob } from 'radash'
-import { ApiError, ApiSuccessResponse, ApiErrorResponse } from './types'
+import { error, ERROR_NAME } from './error'
+import * as t from './types'
+import { ApiError, ApiErrorResponse, ApiSuccessResponse } from './types'
 
 export const defaultResponse: t.Response = {
   _type: '__response__',

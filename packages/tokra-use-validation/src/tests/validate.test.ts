@@ -1,8 +1,8 @@
-import test from 'node:test'
 import assert from 'node:assert'
+import test from 'node:test'
 import type { Props } from 'tokra'
-import { validate, withShapeValidation } from '../useValidation'
 import * as yup from 'yup'
+import { validate, withShapeValidation } from '../useValidation'
 
 const model = yup.object({
   id: yup.number().required(),

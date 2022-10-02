@@ -1,5 +1,5 @@
 import { partial, partob } from 'radash'
-import type { Props, ApiFunction } from 'tokra'
+import type { ApiFunction, Props } from 'tokra'
 import { error } from 'tokra'
 
 export type BasicAuth = {
