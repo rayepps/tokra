@@ -1,6 +1,6 @@
 {
   "name": "tokra-use-api-key",
-  "version": "0.0.1-rc.1",
+  "version": "0.0.1-rc.0",
   "description": "Tokra api key authentication hook",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

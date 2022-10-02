@@ -1,6 +1,6 @@
 {
   "name": "tokra-use-basic-auth",
-  "version": "0.0.0-rc.1",
+  "version": "0.0.1-rc.0",
   "description": "Tokra basic authentication hook",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
