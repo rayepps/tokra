@@ -24,6 +24,7 @@
     "tokra-use-basic-auth": "^0.0.1-rc.2",
     "tokra-use-cors": "^0.0.1-rc.2",
     "tokra-use-jwt-auth": "^0.0.1-rc.2",
+    "tokra-use-path-params": "^0.0.1-rc.1",
     "tokra-use-route": "^0.0.1-rc.1",
     "tokra-use-services": "^0.0.1-rc.2",
     "tokra-use-validation": "^0.0.1-rc.2"

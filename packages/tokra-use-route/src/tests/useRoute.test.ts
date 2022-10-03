@@ -16,7 +16,7 @@ describe('isMatch', () => {
     expect(isMatch(request, '*', '/*/*/*')).toBe(true)
     expect(isMatch(request, '*', '/go/to/dinner')).toBe(true)
   })
-  
+
   test('returns false for requests and keys that do not match', () => {
     expect(isMatch(request, '*', '/back/**')).toBe(false)
     expect(isMatch(request, '*', '/go/*/lunch')).toBe(false)
@@ -26,5 +26,4 @@ describe('isMatch', () => {
     expect(isMatch(request, '*', '/go/to/dinner/**')).toBe(false)
     expect(isMatch(request, 'GET', '*')).toBe(false)
   })
-
 })
