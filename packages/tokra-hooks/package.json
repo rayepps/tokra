@@ -1,0 +1,31 @@
+{
+  "name": "tokra-hooks",
+  "version": "0.0.1-rc.0",
+  "description": "All the Tokra hooks",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "author": "rayepps",
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/rayepps/tokra"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jest --coverage",
+    "clean": "rm -rf ./node_modules && rm -rf ./dist && rm -rf ./coverage"
+  },
+  "dependencies": {
+    "radash": "^7.1.0",
+    "tokra": "^0.0.1-rc.3",
+    "tokra-use-api-key": "^0.0.1-rc.2",
+    "tokra-use-basic-auth": "^0.0.1-rc.2",
+    "tokra-use-cors": "^0.0.1-rc.2",
+    "tokra-use-jwt-auth": "^0.0.1-rc.2",
+    "tokra-use-route": "^0.0.1-rc.1",
+    "tokra-use-services": "^0.0.1-rc.2",
+    "tokra-use-validation": "^0.0.1-rc.2"
+  }
+}
