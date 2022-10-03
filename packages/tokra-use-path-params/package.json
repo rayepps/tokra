@@ -1,0 +1,24 @@
+{
+  "name": "tokra-use-path-params",
+  "version": "0.0.1-rc.0",
+  "description": "Tokra path param parsing hook",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "author": "rayepps",
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/rayepps/tokra"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jest --coverage",
+    "clean": "rm -rf ./node_modules && rm -rf ./dist && rm -rf ./coverage"
+  },
+  "dependencies": {
+    "radash": "^7.1.0",
+    "tokra": "^0.0.1-rc.3"
+  }
+}
