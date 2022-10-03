@@ -1,6 +1,6 @@
 {
   "name": "tokra-use-validation",
-  "version": "0.0.1-rc.1",
+  "version": "0.0.1-rc.2",
   "description": "Tokra request validation hooks",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -15,7 +15,7 @@
     "clean": "rm -rf ./node_modules && rm -rf ./dist && rm -rf ./coverage"
   },
   "dependencies": {
-    "tokra": "^0.0.1-rc.2",
+    "tokra": "^0.0.1-rc.3",
     "yup": "^0.32.11"
   }
 }

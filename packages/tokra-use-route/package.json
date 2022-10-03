@@ -1,6 +1,6 @@
 {
   "name": "tokra-use-route",
-  "version": "0.0.1-rc.0",
+  "version": "0.0.1-rc.1",
   "description": "Tokra routing hook",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -19,6 +19,6 @@
   },
   "dependencies": {
     "radash": "^7.1.0",
-    "tokra": "^0.0.1-rc.2"
+    "tokra": "^0.0.1-rc.3"
   }
 }
