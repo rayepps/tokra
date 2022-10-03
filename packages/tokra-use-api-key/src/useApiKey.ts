@@ -15,7 +15,7 @@ export async function withApiKey(
   keyFunc: string | PropsGetter<string>,
   props: Props
 ) {
-  const header = props.req.headers['x-api-key'] as string
+  const header = props.request.headers['x-api-key'] as string
 
   const key = !isFunction(keyFunc)
     ? keyFunc

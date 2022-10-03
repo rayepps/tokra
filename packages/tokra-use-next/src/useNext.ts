@@ -1,12 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { partial, try as tryit } from 'radash'
-import type {
-  ApiFunction,
-  Props,
-  Request as TokraRequest,
-  Response as TokraResponse
-} from 'tokra'
-import { initProps, responseFromError, responseFromResult } from 'tokra'
+import type { AbstractRequest, AbstractResponse, ApiFunction } from 'tokra'
+import { props, responseFromError, responseFromResult } from 'tokra'
 
 export type NextFunctionOptions = {}
 
@@ -16,8 +11,7 @@ export async function withNext(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const props: Props = initProps(makeReq(req))
-  const [error, result] = await tryit(func)(props)
+  const [error, result] = await tryit(func)(props(makeReq(req)))
   if (error) {
     console.error(error)
   }
@@ -30,8 +24,8 @@ export const useNext =
   (func: ApiFunction) =>
     partial(withNext, func, options)
 
-export function setResponse(res: NextApiResponse, response: TokraResponse) {
-  const { body, status = 200, headers = {} } = response as TokraResponse
+export function setResponse(res: NextApiResponse, response: AbstractResponse) {
+  const { body, status = 200, headers = {} } = response as AbstractResponse
   res.status(status)
   for (const [key, val] of Object.entries(headers)) {
     res.setHeader(key, val)
@@ -39,10 +33,11 @@ export function setResponse(res: NextApiResponse, response: TokraResponse) {
   res.json(body)
 }
 
-const makeReq = (req: NextApiRequest): TokraRequest => ({
+const makeReq = (req: NextApiRequest): AbstractRequest => ({
   headers: req.headers as Record<string, string | string[]>,
   url: req.url ?? '/',
   body: req.body,
+  path: req.url ?? '/',
   method: req.method ?? 'ANY',
   query: req.query as Record<string, string>,
   ip: req.socket.remoteAddress ?? ''

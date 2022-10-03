@@ -2,13 +2,8 @@ import makeCompressionMiddleware from 'compression'
 import type { NextFunction, Request, Response } from 'express'
 import { json as makeJsonMiddleware } from 'express'
 import { partial, sift, try as tryit } from 'radash'
-import type {
-  ApiFunction,
-  Props,
-  Request as ExoRequest,
-  Response as ExoResponse
-} from 'tokra'
-import { initProps, responseFromError, responseFromResult } from 'tokra'
+import type { AbstractRequest, AbstractResponse, ApiFunction } from 'tokra'
+import { props, responseFromError, responseFromResult } from 'tokra'
 
 type ExpressMiddlewareFunc = (
   req: Request,
@@ -42,9 +37,10 @@ export async function withExpress(
 ) {
   const middleware = composeMiddleware(...makeMiddleware(options))
   const reqAfterMiddlware = await middleware(req, res)
-  const props: Props = initProps(makeReq(reqAfterMiddlware))
 
-  const [error, result] = await tryit<any>(func)(props)
+  const [error, result] = await tryit<any>(func)(
+    props(makeReq(reqAfterMiddlware))
+  )
   if (error) console.error(error)
 
   const response = error ? responseFromError(error) : responseFromResult(result)
@@ -56,8 +52,8 @@ export const useExpress =
   (func: ApiFunction) =>
     partial(withExpress, func, options)
 
-export function setResponse(res: Response, response: ExoResponse) {
-  const { body, status = 200, headers = {} } = response as ExoResponse
+export function setResponse(res: Response, response: AbstractResponse) {
+  const { body, status = 200, headers = {} } = response as AbstractResponse
   res.status(status)
   for (const [key, val] of Object.entries(headers)) {
     res.set(key, val)
@@ -65,9 +61,10 @@ export function setResponse(res: Response, response: ExoResponse) {
   res.json(body)
 }
 
-const makeReq = (req: Request): ExoRequest => ({
+const makeReq = (req: Request): AbstractRequest => ({
   headers: req.headers as Record<string, string | string[]>,
   url: req.originalUrl,
+  path: req.path,
   body: req.body,
   method: req.method,
   query: req.query as Record<string, string>,

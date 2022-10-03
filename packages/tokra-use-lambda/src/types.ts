@@ -1,7 +1,7 @@
 import { Context } from 'aws-lambda'
-import type { Request } from 'tokra'
+import type { AbstractRequest } from 'tokra'
 
-export type LambdaRequest<TEvent = any> = Request & {
+export type LambdaRequest<TEvent = any> = AbstractRequest & {
   event: TEvent
   context: Context
 }

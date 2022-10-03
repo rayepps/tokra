@@ -14,7 +14,7 @@ export async function withCors(
   corsHeaders: Record<string, string>,
   props: Props
 ) {
-  if (props.req.method.toLowerCase() === 'options') {
+  if (props.request.method.toLowerCase() === 'options') {
     return {
       ...props.response,
       headers: {

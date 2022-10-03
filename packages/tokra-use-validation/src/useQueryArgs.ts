@@ -5,7 +5,7 @@ import { useValidation } from './useValidation'
 
 export const useQueryArgs = partial(
   useValidation,
-  (props: Props) => props.req.query
+  (props: Props) => props.request.query
 ) as <TArgs>(
   shapeMaker: (yup: Yup) => KeyOfType<TArgs, any>
 ) => (func: ApiFunction) => ApiFunction

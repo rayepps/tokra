@@ -5,7 +5,7 @@ import { useValidation } from './useValidation'
 
 export const useHeaderArgs = partial(
   useValidation,
-  (props: Props) => props.req.headers
+  (props: Props) => props.request.headers
 ) as <TArgs = any>(
   shapeMaker: (yup: Yup) => KeyOfType<TArgs, any>
 ) => (func: ApiFunction) => ApiFunction

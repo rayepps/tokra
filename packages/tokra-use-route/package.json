@@ -1,0 +1,24 @@
+{
+  "name": "tokra-use-route",
+  "version": "0.0.1-rc.0",
+  "description": "Tokra routing hook",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "author": "rayepps",
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/rayepps/tokra"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "node --require ts-node/register --test **/tests/*.test.ts",
+    "clean": "rm -rf ./node_modules && rm -rf ./dist && rm -rf ./coverage"
+  },
+  "dependencies": {
+    "radash": "^7.1.0",
+    "tokra": "^0.0.1-rc.2"
+  }
+}

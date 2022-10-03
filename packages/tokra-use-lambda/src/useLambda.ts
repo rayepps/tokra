@@ -1,6 +1,6 @@
 import _ from 'radash'
-import type { ApiFunction, Props } from 'tokra'
-import { initProps, responseFromError, responseFromResult } from 'tokra'
+import type { ApiFunction } from 'tokra'
+import { props, responseFromError, responseFromResult } from 'tokra'
 import { LambdaRequest } from './types'
 
 export type LambdaOptions = {
@@ -13,9 +13,7 @@ export async function withLambda(
   event: AWSLambda.APIGatewayEvent,
   context: AWSLambda.Context
 ) {
-  const props: Props = initProps(makeReq(event, context))
-
-  const [error, result] = await _.try<any>(func)(props)
+  const [error, result] = await _.try<any>(func)(props(makeReq(event, context)))
   if (error) {
     console.error(error)
   }
@@ -49,6 +47,7 @@ const makeReq = (
   return {
     headers,
     url: event.path,
+    path: event.path,
     body: (() => {
       if (!event.body || event.body === '') {
         return {}

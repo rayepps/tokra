@@ -1,9 +1,7 @@
-import { partob } from 'radash'
-import { error, ERROR_NAME } from './error'
+import { error as createError, ERROR_NAME } from './error'
 import * as t from './types'
-import { ApiError, ApiErrorResponse, ApiSuccessResponse } from './types'
 
-export const defaultResponse: t.Response = {
+export const defaultResponse: t.AbstractResponse = {
   _type: '__response__',
   status: 200,
   headers: {},
@@ -12,19 +10,21 @@ export const defaultResponse: t.Response = {
   }
 }
 
-const unknown = partob(error, {
-  message: 'Unknown Error',
-  status: 500,
-  cause: 'UNKNOWN',
-  note: 'This one is on us, we apologize for the issue. The issue has been logged and our development team will be working on fixing it asap.'
+const makeErrorBody = (
+  error: t.AbstractError
+): Omit<t.ErrorResult, 'version'> => ({
+  error,
+  result: null,
+  status: error.status
 })
 
-export const initProps = (req: t.Request): t.Props => ({
-  auth: {},
-  args: {},
-  services: {},
-  response: defaultResponse,
-  req
+const makeSuccessBody = <T>(
+  result: T,
+  status = 200
+): Omit<t.SuccessResult<T>, 'version'> => ({
+  error: null,
+  result,
+  status
 })
 
 /**
@@ -36,65 +36,55 @@ const isResponse = (obj: any): boolean => {
   return obj?._type === '__response__'
 }
 
-export const responseFromResult = (result: any): t.Response => {
-  const makeOk = <T>(
-    result: T,
-    status = 200
-  ): Omit<ApiSuccessResponse<T>, 'version'> => ({
-    error: null,
-    result,
-    status
-  })
-
+export const responseFromResult = (result: any): t.AbstractResponse => {
   if (isResponse(result)) {
-    return result as t.Response
+    return result as t.AbstractResponse
   }
 
   // If nothing was returned then return the default
-  // ok response
+  // success response
   if (!result)
     return {
       ...defaultResponse,
-      body: makeOk(defaultResponse.body)
+      body: makeSuccessBody(defaultResponse.body)
     }
 
   // Else, the func returned something that should be
   // returned as the json body response
   return {
     ...defaultResponse,
-    body: makeOk(result)
+    body: makeSuccessBody(result)
   }
 }
 
-export const responseFromError = (error: any): t.Response => {
-  const makeError = (error: ApiError): Omit<ApiErrorResponse, 'version'> => ({
-    error,
-    result: null,
-    status: error.status
-  })
-
+export const responseFromError = (error: any): t.AbstractResponse => {
   if (isResponse(error)) {
-    return error as t.Response
+    return error as t.AbstractResponse
   }
 
   // If its our custom error then respond with the
   // data indicated by our error object
-  if (error && error.name === ERROR_NAME) {
+  if (error?.name === ERROR_NAME) {
     return {
       ...defaultResponse,
       status: error.status,
-      body: makeError(error as t.ApiError)
+      body: makeErrorBody(error as t.AbstractError)
     }
   }
 
   // Else its some generic error then wrap it in our
   // error object as an unknown error
-  const err = unknown({
-    key: 'nf.err.api.core.express.fairtex'
-  })
   return {
     ...defaultResponse,
-    status: err.status,
-    body: makeError(err)
+    status: 500,
+    body: makeErrorBody(
+      createError({
+        key: 'err.unknown',
+        message: 'Unknown Error',
+        status: 500,
+        cause: 'UNKNOWN',
+        note: 'This one is on us, we apologize for the issue. The issue has been logged and our development team will be working on fixing it asap.'
+      })
+    )
   }
 }

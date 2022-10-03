@@ -1,29 +1,30 @@
 import { test } from '@jest/globals'
+import { AbstractRequest, Props } from 'tokra'
 import { withApiKey } from '../useApiKey'
 
 test('withApiKey does not throw error given valid key', async () => {
   const mockFn = async (props: any) => props
-  const mockProps = {
-    req: {
+  const mockProps: Pick<Props, 'request'> = {
+    request: {
       headers: {
         'x-api-key': 'Key mock-secret'
       }
-    }
-  } as any
-  await withApiKey(mockFn, 'mock-secret', mockProps)
+    } as unknown as AbstractRequest
+  }
+  await withApiKey(mockFn, 'mock-secret', mockProps as Props)
 })
 
 test('withApiKey throws error when api key is missing', async () => {
   const mockFn = async (props: any) => props
-  const mockProps = {
-    req: {
+  const mockProps: Pick<Props, 'request'> = {
+    request: {
       headers: {
         /** no api key header **/
       }
-    }
-  } as any
+    } as unknown as AbstractRequest
+  }
   try {
-    await withApiKey(mockFn, 'mock-secret', mockProps)
+    await withApiKey(mockFn, 'mock-secret', mockProps as Props)
   } catch (err) {
     return
   }
@@ -32,15 +33,15 @@ test('withApiKey throws error when api key is missing', async () => {
 
 test('withApiKey throws error when api key does not match', async () => {
   const mockFn = async (props: any) => props
-  const mockProps = {
-    req: {
+  const mockProps: Pick<Props, 'request'> = {
+    request: {
       headers: {
         'x-api-key': 'wrong-mock-secret'
       }
-    }
-  } as any
+    } as unknown as AbstractRequest
+  }
   try {
-    await withApiKey(mockFn, 'mock-secret', mockProps)
+    await withApiKey(mockFn, 'mock-secret', mockProps as Props)
   } catch (err) {
     return
   }

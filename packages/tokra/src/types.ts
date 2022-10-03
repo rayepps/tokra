@@ -1,4 +1,4 @@
-export interface ApiError {
+export interface AbstractError {
   /**
    * Always tokra.error when thrown by a
    * tokra hook
@@ -52,32 +52,33 @@ export interface ApiError {
   note: string
 }
 
-export interface ApiErrorResponse {
-  error: ApiError
+export interface ErrorResult {
+  error: AbstractError
   result: null
   version: string
   status: number
 }
 
-export interface ApiSuccessResponse<T> {
+export interface SuccessResult<T> {
   error: null
   result: T
   version: string
   status: number
 }
 
-export type ApiResponse<T> = ApiErrorResponse | ApiSuccessResponse<T>
+export type Result<T> = ErrorResult | SuccessResult<T>
 
-export type Request = {
+export type AbstractRequest = {
   headers: Record<string, string | string[]>
   url: string
+  path: string
   body: Record<string, any> | string | null
   method: string
   query: Record<string, string>
   ip: string
 }
 
-export type Response = {
+export type AbstractResponse = {
   _type: '__response__'
   headers: Record<string, string | string[]>
   status: number
@@ -88,20 +89,20 @@ export interface Props<
   ArgType = any,
   ServiceType = any,
   AuthType = any,
-  RequestType extends Request = Request
+  RequestType extends AbstractRequest = AbstractRequest
 > {
   auth: AuthType
   args: ArgType
   services: ServiceType
-  req: RequestType
-  response: Response
+  request: RequestType
+  response: AbstractResponse
 }
 
 export type ApiFunction<
   ArgType = any,
   ServiceType = any,
   AuthType = any,
-  RequestType extends Request = Request
+  RequestType extends AbstractRequest = AbstractRequest
 > = (
   props: Props<ArgType, ServiceType, AuthType, RequestType>
-) => Promise<Response | any>
+) => Promise<AbstractResponse | any>

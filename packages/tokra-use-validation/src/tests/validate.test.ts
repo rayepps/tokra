@@ -1,5 +1,5 @@
 import { expect, test } from '@jest/globals'
-import type { Props } from 'tokra'
+import type { AbstractRequest, Props } from 'tokra'
 import * as yup from 'yup'
 import { validate, withShapeValidation } from '../useValidation'
 
@@ -35,17 +35,22 @@ test('validate casts valid model', async () => {
 })
 
 test('withShapeValidation applies model attributes to args', async () => {
-  const mockHandlerFn = (props: any) => props.args
-  const getArgs = (props: any) => props.req.query
-  const props = {
-    req: {
+  const mockHandlerFn = (props: Props) => props.args
+  const getArgs = (props: Props) => props.request.query
+  const props: Pick<Props, 'request'> = {
+    request: {
       query: {
         id: 22,
         name: 'mock-nmame'
       }
-    }
-  } as any as Props
-  const args = await withShapeValidation(mockHandlerFn, model, getArgs, props)
-  expect(args.id).toBe(props.req.query.id)
-  expect(args.name).toBe(props.req.query.name)
+    } as unknown as AbstractRequest
+  }
+  const args = await withShapeValidation(
+    mockHandlerFn,
+    model,
+    getArgs,
+    props as Props
+  )
+  expect(args.id).toBe(props.request.query.id)
+  expect(args.name).toBe(props.request.query.name)
 })

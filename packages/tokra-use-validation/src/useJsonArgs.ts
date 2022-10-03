@@ -5,7 +5,7 @@ import { useValidation } from './useValidation'
 
 export const useJsonArgs = partial(
   useValidation,
-  (props: Props) => props.req.body
+  (props: Props) => props.request.body
 ) as <TArgs = any>(
   shapeMaker: (yup: Yup) => KeyOfType<TArgs, any>
 ) => (func: ApiFunction) => ApiFunction

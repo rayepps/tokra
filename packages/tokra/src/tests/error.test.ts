@@ -1,5 +1,4 @@
 import { expect, test } from '@jest/globals'
-
 import { ERROR_NAME } from '../error'
 
 test('do not fail because there are no tests', () => {

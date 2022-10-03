@@ -88,7 +88,7 @@ export async function withJWTAuth(
   options: JWTAuthOptions,
   props: Props
 ) {
-  const header = props.req.headers['authorization'] as string
+  const header = props.request.headers['authorization'] as string
   if (!header) {
     throw unauthorized({
       note: 'This function requires authentication via a token',
