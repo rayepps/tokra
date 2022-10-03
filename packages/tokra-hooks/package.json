@@ -1,6 +1,6 @@
 {
   "name": "tokra-hooks",
-  "version": "0.0.1-rc.0",
+  "version": "0.0.1-rc.1",
   "description": "All the Tokra hooks",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
