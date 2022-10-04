@@ -1,34 +1,42 @@
 import { compose } from 'radash'
 import type { Props } from 'tokra'
-import { useLambda } from 'tokra-use-lambda'
+import { useExpress } from 'tokra-use-express'
 import { usePathParams } from 'tokra-use-path-params'
 import { useServices } from 'tokra-use-services'
 import makeDatabase, { Database } from '../../../database'
 import * as t from '../../../types'
 
 type Args = {
-  id: t.Id<'timeout'>
+  id: t.Id<'interval'>
 }
 type Services = {
   db: Database
 }
 type Response = void
 
-export const clearTimeoutEndpoint = async ({
+export const clearIntervalEndpoint = async ({
   services,
   args
 }: Props<Args, Services>): Promise<Response> => {
   const { db } = services
-  await db.timeouts.patch(args.id, {
+  await db.intervals.patch(args.id, {
     status: 'cleared'
   })
 }
 
-export default compose(
-  useLambda(),
-  usePathParams('/v1/timeout/{id}/clear'),
-  useServices<Services>({
-    db: makeDatabase
-  }),
-  clearTimeoutEndpoint
-)
+const endpoint: t.Endpoint = {
+  handler: compose(
+    useExpress(),
+    usePathParams('/v1/interval/{id}/clear'),
+    useServices<Services>({
+      db: makeDatabase
+    }),
+    clearIntervalEndpoint
+  ),
+  config: {
+    method: 'PUT',
+    path: '/v1/interval/:id/clear'
+  }
+}
+
+export default endpoint

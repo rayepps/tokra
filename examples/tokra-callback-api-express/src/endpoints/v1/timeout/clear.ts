@@ -1,6 +1,6 @@
 import { compose } from 'radash'
 import type { Props } from 'tokra'
-import { useLambda } from 'tokra-use-lambda'
+import { useExpress } from 'tokra-use-express'
 import { usePathParams } from 'tokra-use-path-params'
 import { useServices } from 'tokra-use-services'
 import makeDatabase, { Database } from '../../../database'
@@ -24,11 +24,19 @@ export const clearTimeoutEndpoint = async ({
   })
 }
 
-export default compose(
-  useLambda(),
-  usePathParams('/v1/timeout/{id}/clear'),
-  useServices<Services>({
-    db: makeDatabase
-  }),
-  clearTimeoutEndpoint
-)
+const endpoint: t.Endpoint = {
+  handler: compose(
+    useExpress(),
+    usePathParams('/v1/timeout/{id}/clear'),
+    useServices<Services>({
+      db: makeDatabase
+    }),
+    clearTimeoutEndpoint
+  ),
+  config: {
+    method: 'PUT',
+    path: '/v1/timeout/:id/clear'
+  }
+}
+
+export default endpoint
