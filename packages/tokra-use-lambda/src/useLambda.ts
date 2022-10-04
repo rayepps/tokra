@@ -1,7 +1,7 @@
 import { isString, lowerize, partial, try as tryit } from 'radash'
 import type { ApiFunction } from 'tokra'
 import { props, responseFromError, responseFromResult } from 'tokra'
-import { LambdaRequest } from './types'
+import type { LambdaRequest } from './types'
 
 export type LambdaOptions = {}
 
