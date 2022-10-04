@@ -1,6 +1,6 @@
 {
   "name": "tokra-use-lambda",
-  "version": "0.0.1-rc.3",
+  "version": "0.0.1-rc.4",
   "description": "Tokra root hook to handle function running on AWS Lambda",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
