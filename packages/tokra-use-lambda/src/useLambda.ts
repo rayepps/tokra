@@ -1,11 +1,9 @@
-import _ from 'radash'
+import { isString, lowerize, partial, try as tryit } from 'radash'
 import type { ApiFunction } from 'tokra'
 import { props, responseFromError, responseFromResult } from 'tokra'
 import { LambdaRequest } from './types'
 
-export type LambdaOptions = {
-  callbackWaitsForEmptyEventLoop?: boolean
-}
+export type LambdaOptions = {}
 
 export async function withLambda(
   func: ApiFunction,
@@ -13,15 +11,14 @@ export async function withLambda(
   event: AWSLambda.APIGatewayEvent,
   context: AWSLambda.Context
 ) {
-  const [error, result] = await _.try<any>(func)(props(makeReq(event, context)))
+  const [error, result] = await tryit<any>(func)(
+    props(makeRequest(event, context))
+  )
   if (error) {
     console.error(error)
   }
 
   const response = error ? responseFromError(error) : responseFromResult(result)
-
-  context.callbackWaitsForEmptyEventLoop =
-    options.callbackWaitsForEmptyEventLoop === false ? false : true
 
   // @link https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html
   return {
@@ -36,14 +33,14 @@ export async function withLambda(
 }
 
 export const useLambda = (options?: LambdaOptions) => (func: ApiFunction) => {
-  return _.partial(withLambda, func, options ?? {})
+  return partial(withLambda, func, options ?? {})
 }
 
-const makeReq = (
+export const makeRequest = (
   event: AWSLambda.APIGatewayEvent,
   context: AWSLambda.Context
 ): LambdaRequest => {
-  const headers = _.lowerize((event.headers as Record<string, string>) ?? {})
+  const headers = lowerize((event.headers as Record<string, string>) ?? {})
   return {
     headers,
     url: event.path,
@@ -55,7 +52,7 @@ const makeReq = (
       if (event.isBase64Encoded) {
         return JSON.parse(Buffer.from(event.body, 'base64').toString())
       }
-      if (_.isString(event.body)) {
+      if (isString(event.body)) {
         return JSON.parse(event.body)
       }
       return event.body
